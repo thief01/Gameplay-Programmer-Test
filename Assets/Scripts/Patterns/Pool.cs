@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Pool<T>  where T : MonoBehaviour
 {
@@ -18,7 +19,12 @@ public class Pool<T>  where T : MonoBehaviour
     }
 
     private static Pool<T> instance;
-    
+
+    public int CurrentPoolObjects => pooledObjects.Count;
+
+    public UnityEvent OnObjectDestroyed = new UnityEvent();
+    public UnityEvent OnObjectSpawned = new UnityEvent();
+
     private List<T> pooledObjects = new List<T>();
     private GameObject prefab;
     private Transform poolParrent;
