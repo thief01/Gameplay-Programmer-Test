@@ -9,22 +9,23 @@ public class Astereoid : MonoBehaviour
     [SerializeField] private float speed;
     private SpriteRenderer spriteRenderer;
     private Vector2 velocity;
-    private Rigidbody rigidbody2D;
+    private Rigidbody rigidbody;
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
+        GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
     }
 
     private void OnEnable()
     {
-        rigidbody2D.velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized *
+        rigidbody.velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized *
                                Random.Range(0.01f, speed);
     }
     
     public void SetDirection(Vector2 direction)
     {
-        rigidbody2D.velocity = direction * speed;
+        rigidbody.velocity = direction * speed;
     }
     
     private void OnCollisionEnter(Collision col)
@@ -38,7 +39,15 @@ public class Astereoid : MonoBehaviour
 
     public void DestroyPooledObject()
     {
-        rigidbody2D.velocity = Vector2.zero;
+        rigidbody.velocity = Vector2.zero;
         Pool<Astereoid>.Instance.BackToPool(this);
+    }
+
+    private void OnGameStateChanged()
+    {
+        if (GameManager.Instance.GameState == GameState.waitForRestart)
+        {
+            DestroyPooledObject();
+        }
     }
 }

@@ -21,6 +21,8 @@ public class ShipWeapon : MonoBehaviour
 
     private void Fire()
     {
+        if (GameManager.Instance.GameState == GameState.waitForRestart)
+            return;
         reloadTime = 1/attackSpeed;
         var bullet = Pool<Bullet>.Instance.GetObject();
 

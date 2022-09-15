@@ -10,12 +10,17 @@ public class Bullet : MonoBehaviour
     
     [SerializeField] private float speed;
     
-    private Rigidbody rigidbody2D;
+    private Rigidbody rigidbody;
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
     }
-    
+
+    private void Start()
+    {
+        GameManager.Instance.OnGameStateChanged.AddListener(DestroyPooledObject);
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         DestroyPooledObject();
@@ -23,14 +28,14 @@ public class Bullet : MonoBehaviour
 
     public void InitBullet()
     {
-        rigidbody2D.velocity = transform.right * speed;
+        rigidbody.velocity = transform.right * speed;
         StartCoroutine(LifeTime());
     }
 
     public void DestroyPooledObject()
     {
         StopAllCoroutines();
-        rigidbody2D.velocity = Vector2.zero;
+        rigidbody.velocity = Vector2.zero;
         Pool<Bullet>.Instance.BackToPool(this);
     }
 

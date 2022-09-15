@@ -8,11 +8,11 @@ public class Ship : MonoBehaviour
     [SerializeField] private float maxSpeed;
     [SerializeField] private float forceMultipliter;
     [SerializeField] private float rotationSpeed;
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody rigidbody;
 
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody = GetComponent<Rigidbody>();
     }
     
     public void Move(Vector2 direction)
@@ -34,10 +34,16 @@ public class Ship : MonoBehaviour
 
         flyingDirection *= maxSpeed * Time.deltaTime;
         
-        Vector2 velocity = rigidbody2D.velocity;
+        Vector2 velocity = rigidbody.velocity;
         if (((Vector2)flyingDirection + velocity).magnitude <= maxSpeed)
         {
-            rigidbody2D.velocity += (Vector2)flyingDirection;
+            rigidbody.velocity += flyingDirection;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameManager.Instance.SetGameState(GameState.waitForRestart);
+        rigidbody.velocity=Vector3.zero;
     }
 }

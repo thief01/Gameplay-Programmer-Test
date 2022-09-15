@@ -25,6 +25,7 @@ public class MapController : Singleton<MapController>
     {
         Pool<Astereoid>.Instance.OnObjectDestroyed.AddListener(() => StartCoroutine(OnAstereoidDestroyed()));
         StartCoroutine(SpawningAstereoids());
+        GameManager.Instance.OnGameStateChanged.AddListener(OnGameStatechanged );
     }
 
     private IEnumerator SpawningAstereoids()
@@ -51,6 +52,8 @@ public class MapController : Singleton<MapController>
 
     private IEnumerator OnAstereoidDestroyed()
     {
+        if (GameManager.Instance.GameState == GameState.waitForRestart)
+            yield break;
         yield return new WaitForSeconds(RESPAWN_TIME);
         var astereoid = Pool<Astereoid>.Instance.GetObject();
 
@@ -75,6 +78,18 @@ public class MapController : Singleton<MapController>
                 astereoid.transform.position = new Vector3((i + offset * 10)*direction.x, (j + offset * 10)*direction.y);
                 astereoidCounter++;
             }
+        }
+    }
+
+    private void OnGameStatechanged()
+    {
+        if (GameManager.Instance.GameState == GameState.playing)
+        {
+            StartCoroutine(SpawningAstereoids());
+        }
+        if (GameManager.Instance.GameState == GameState.waitForRestart)
+        {
+            StopAllCoroutines();
         }
     }
 
