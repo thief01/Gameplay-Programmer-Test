@@ -10,10 +10,10 @@ public class Bullet : MonoBehaviour
     
     [SerializeField] private float speed;
     
-    private Rigidbody2D rigidbody2D;
+    private Rigidbody rigidbody2D;
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody>();
     }
     
     private void OnCollisionEnter(Collision col)
