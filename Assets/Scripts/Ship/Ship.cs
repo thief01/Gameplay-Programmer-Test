@@ -5,8 +5,7 @@ namespace Ship
 {
     public class Ship : MonoBehaviour
     {
-        [SerializeField] private float maxSpeed;
-        [SerializeField] private float forceMultipliter;
+        [SerializeField] private float speed=5;
         [SerializeField] private float rotationSpeed;
         private Rigidbody rigidbody;
 
@@ -20,7 +19,7 @@ namespace Ship
             float rotation = direction.x * rotationSpeed;
             transform.eulerAngles += new Vector3(0, 0, rotation);
         
-            float force = direction.y * forceMultipliter * Time.deltaTime;
+            float force = direction.y * speed * Time.deltaTime;
 
             Vector3 flyingDirection = Vector3.zero;
             if (force < 0)
@@ -32,13 +31,8 @@ namespace Ship
                 flyingDirection = -transform.right;
             }
 
-            flyingDirection *= maxSpeed * Time.deltaTime;
-        
-            Vector2 velocity = rigidbody.velocity;
-            if (((Vector2)flyingDirection + velocity).magnitude <= maxSpeed)
-            {
-                rigidbody.velocity += flyingDirection;
-            }
+            flyingDirection *= speed;
+            rigidbody.velocity = flyingDirection;
         }
 
         private void OnCollisionEnter(Collision collision)
