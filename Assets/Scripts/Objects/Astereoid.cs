@@ -23,12 +23,7 @@ namespace Objects
             rigidbody.velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized *
                                  Random.Range(0.01f, speed);
         }
-    
-        public void SetDirection(Vector2 direction)
-        {
-            rigidbody.velocity = direction * speed;
-        }
-    
+        
         private void OnCollisionEnter(Collision col)
         {
             if (col.gameObject.tag == "Bullet")
@@ -38,7 +33,12 @@ namespace Objects
             
             DestroyPooledObject();
         }
-
+    
+        public void SetDirection(Vector2 direction)
+        {
+            rigidbody.velocity = direction * speed;
+        }
+        
         public void DestroyPooledObject()
         {
             rigidbody.velocity = Vector2.zero;

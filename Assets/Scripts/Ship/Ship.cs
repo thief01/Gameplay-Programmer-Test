@@ -13,6 +13,12 @@ namespace Ship
         {
             rigidbody = GetComponent<Rigidbody>();
         }
+        
+        private void OnCollisionEnter(Collision collision)
+        {
+            GameManager.Instance.SetGameState(GameState.waitForRestart);
+            rigidbody.velocity=Vector3.zero;
+        }
     
         public void Move(Vector2 direction)
         {
@@ -33,12 +39,6 @@ namespace Ship
 
             flyingDirection *= speed;
             rigidbody.velocity = flyingDirection;
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            GameManager.Instance.SetGameState(GameState.waitForRestart);
-            rigidbody.velocity=Vector3.zero;
         }
     }
 }

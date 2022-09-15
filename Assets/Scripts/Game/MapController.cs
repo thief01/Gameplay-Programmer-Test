@@ -8,23 +8,13 @@ namespace Game
 {
     public class MapController : Singleton<MapController>
     {
-        private const int ASTEREOIDS_OFFSET = 10;
         private const int MAP_SIZE = 160;
         private const int WAVE_IN_ROW = 8;
         private const int WAVE_SIZE = 10;
         private const float RESPAWN_TIME = 1;
-
-        [SerializeField] private Transform player;
+        
         [SerializeField] private Camera camera;
-
-        private Vector2 cameraSize
-        {
-            get
-            {
-                return new Vector2(camera.orthographicSize*2, camera.orthographicSize)*1.25f;
-            }
-        }
-    
+        
         private void Start()
         {
             Pool<Astereoid>.Instance.OnObjectDestroyed.AddListener(() => StartCoroutine(OnAstereoidDestroyed()));
