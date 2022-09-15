@@ -49,7 +49,6 @@ public class Pool<T>  where T : MonoBehaviour
 
     public T GetObject()
     {
-        
         if (pooledObjects.Count == 0)
         {
             Debug.LogWarning("No objects in pool");
