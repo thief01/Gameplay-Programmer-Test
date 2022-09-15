@@ -5,17 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28529fd1-892f-4b71-bcd8-b9be90ea9252" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/GameManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/InitPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/InitPool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/MapController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/MapController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/Astereoid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/Astereoid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/Bullet.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/Bullet.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Patterns/Pool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Patterns/Pool.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Patterns/Singleton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Patterns/Singleton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ship/Ship.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ship/Ship.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Ship/ShipWeapon.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Ship/ShipWeapon.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UILose.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UILose.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIScore.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIScore.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -100,7 +90,7 @@
       <updated>1662749956713</updated>
       <workItem from="1662749958390" duration="9253000" />
       <workItem from="1663173272066" duration="8159000" />
-      <workItem from="1663259303535" duration="6787000" />
+      <workItem from="1663259303535" duration="7599000" />
     </task>
     <servers />
   </component>
