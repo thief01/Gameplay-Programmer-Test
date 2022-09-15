@@ -71,7 +71,7 @@ public class MapController : Singleton<MapController>
             for (int j = 1; j < 10; j++)
             {
                 var astereoid = Pool<Astereoid>.Instance.GetObject();
-                astereoid.SetSpeed(GetDirectionByPerlin(i+offset*10,j+offset*10));
+                astereoid.SetDirection(GetDirectionByPerlin(i+offset*10,j+offset*10));
                 astereoid.transform.position = new Vector3((i + offset * 10)*direction.x, (j + offset * 10)*direction.y);
                 astereoidCounter++;
             }
