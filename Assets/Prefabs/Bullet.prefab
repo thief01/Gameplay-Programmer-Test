@@ -100,6 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
+  collisionRange: 0.15
 --- !u!50 &1706452734559067661
 Rigidbody2D:
   serializedVersion: 4
