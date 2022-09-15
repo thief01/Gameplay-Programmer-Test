@@ -6,23 +6,42 @@ using Random = UnityEngine.Random;
 
 public class Astereoid : MonoBehaviour
 {
+    public float ColliderSize => colliderSize;
     [SerializeField] private float speed;
-    private Rigidbody2D rigidbody2D;
+
+    [SerializeField] private float colliderSize;
+    private SpriteRenderer spriteRenderer;
+    private Vector2 velocity;
+    private Rigidbody rigidbody2D;
+
     private void Awake()
     {
-        rigidbody2D = GetComponent<Rigidbody2D>();
+        rigidbody2D = GetComponent<Rigidbody>();
     }
 
     private void OnEnable()
     {
-        do
-        {
-            rigidbody2D.velocity = new Vector2(Random.Range(-1, 1), Random.Range(-1, 1)).normalized * speed;
-        } while (rigidbody2D.velocity.magnitude == 0);
+        rigidbody2D.velocity = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f)).normalized *
+                               Random.Range(0.01f, speed);
     }
 
-    private void OnCollisionEnter2D(Collision2D col)
+    private void OnDrawGizmosSelected()
     {
+        Gizmos.DrawWireSphere(transform.position, colliderSize);
+    }
+
+    public void SetSpeed(Vector2 direction)
+    {
+        rigidbody2D.velocity = direction * speed;
+    }
+
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "Bullet")
+        {
+            GameManager.Instance.AddScore();
+        }
         DestroyPooledObject();
     }
 
