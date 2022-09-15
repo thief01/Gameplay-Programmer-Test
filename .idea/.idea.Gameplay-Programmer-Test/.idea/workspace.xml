@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28529fd1-892f-4b71-bcd8-b9be90ea9252" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Gameplay-Programmer-Test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Gameplay-Programmer-Test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Astereoid.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Astereoid.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Game/MapController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Game/MapController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Objects/Astereoid.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Objects/Astereoid.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/DynamicsManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/GraphicsSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TimelineSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +96,7 @@
       <updated>1662749956713</updated>
       <workItem from="1662749958390" duration="9253000" />
       <workItem from="1663173272066" duration="8159000" />
-      <workItem from="1663259303535" duration="8046000" />
+      <workItem from="1663259303535" duration="10521000" />
     </task>
     <servers />
   </component>

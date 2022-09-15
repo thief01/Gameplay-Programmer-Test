@@ -35,6 +35,7 @@ namespace Objects
             {
                 GameManager.Instance.AddScore();
             }
+            
             DestroyPooledObject();
         }
 

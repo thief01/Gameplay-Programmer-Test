@@ -10,6 +10,8 @@ namespace Game
     {
         private const int ASTEREOIDS_OFFSET = 10;
         private const int MAP_SIZE = 160;
+        private const int WAVE_IN_ROW = 8;
+        private const int WAVE_SIZE = 10;
         private const float RESPAWN_TIME = 1;
 
         [SerializeField] private Transform player;
@@ -36,7 +38,7 @@ namespace Game
             int x = -MAP_SIZE;
             int y = -MAP_SIZE;
 
-            int offset = 1;
+            Vector2 offset = Vector2.one;
             int astereoidCounter = 0;
         
             do
@@ -47,7 +49,13 @@ namespace Game
                 SpawnWave(new Vector2(1,-1), offset, ref astereoidCounter);
                 SpawnWave(new Vector2(-1,1), offset, ref astereoidCounter);
 
-                offset++;
+                offset.x++;
+                if (offset.x>=WAVE_IN_ROW)
+                {
+                    offset.y++;
+                    offset.x = 1;
+                }
+                
 
             } while (astereoidCounter<MAP_SIZE*MAP_SIZE);
         }
@@ -58,26 +66,29 @@ namespace Game
                 yield break;
             yield return new WaitForSeconds(RESPAWN_TIME);
             var astereoid = Pool<Astereoid>.Instance.GetObject();
-
+            astereoid.gameObject.SetActive(false);
             Vector2 position = Vector2.zero;
             do
             {
                 position = new Vector2(Random.Range(-MAP_SIZE / 2, MAP_SIZE / 2),
                     Random.Range(-MAP_SIZE / 2, MAP_SIZE / 2));
-            } while (IsClosestToPlayer(position));
+                yield return null;
 
+            } while (Vector3.Distance(position, camera.transform.position) <= camera.orthographicSize*3);
+
+            astereoid.gameObject.SetActive(true);
             astereoid.transform.position = position;
         }
 
-        private void SpawnWave(Vector2 direction, int offset, ref int astereoidCounter)
+        private void SpawnWave(Vector2 direction, Vector2 offset, ref int astereoidCounter)
         {
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i < WAVE_SIZE; i++)
             {
-                for (int j = 1; j < 10; j++)
+                for (int j = 1; j < WAVE_SIZE; j++)
                 {
                     var astereoid = Pool<Astereoid>.Instance.GetObject();
-                    astereoid.SetDirection(GetDirectionByPerlin(i+offset*10,j+offset*10));
-                    astereoid.transform.position = new Vector3((i + offset * 10)*direction.x, (j + offset * 10)*direction.y);
+                    astereoid.SetDirection(GetDirectionByPerlin(i+(int)offset.x*10,j+(int)offset.y*10));
+                    astereoid.transform.position = new Vector3((i + offset.x * 10)*direction.x, (j + offset.y * 10)*direction.y);
                     astereoidCounter++;
                 }
             }
@@ -99,12 +110,6 @@ namespace Game
         {
             float angle = Mathf.PerlinNoise((float)x / MAP_SIZE, (float)y / MAP_SIZE)*2 % 1;
             return new Vector2(Mathf.Cos(360*angle*Mathf.Deg2Rad) , Mathf.Sign(360*angle*Mathf.Deg2Rad));
-        }
-
-        private bool IsClosestToPlayer(Vector2 point)
-        {
-            return point.x < player.position.x - cameraSize.x && point.y < player.position.y - cameraSize.y &&
-                   point.x > player.position.x + cameraSize.x && point.y > player.position.y + cameraSize.y;
         }
     }
 }
