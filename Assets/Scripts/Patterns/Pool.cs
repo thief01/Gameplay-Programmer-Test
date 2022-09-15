@@ -49,12 +49,14 @@ public class Pool<T>  where T : MonoBehaviour
 
     public T GetObject()
     {
+        
         if (pooledObjects.Count == 0)
         {
             Debug.LogWarning("No objects in pool");
             return default(T);
         }
 
+        OnObjectSpawned.Invoke();
         T t = pooledObjects[0];
         t.gameObject.SetActive(true);
         pooledObjects.RemoveAt(0);
@@ -65,5 +67,6 @@ public class Pool<T>  where T : MonoBehaviour
     {
         t.gameObject.SetActive(false);
         pooledObjects.Add(t);
+        OnObjectDestroyed.Invoke();
     }
 }
