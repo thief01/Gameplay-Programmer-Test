@@ -1,71 +1,73 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Pool<T>  where T : MonoBehaviour
+namespace Patterns
 {
-    public static Pool<T> Instance
+    public class Pool<T>  where T : MonoBehaviour
     {
-        get
+        public static Pool<T> Instance
         {
-            if (instance == null)
+            get
             {
-                instance = new Pool<T>();
+                if (instance == null)
+                {
+                    instance = new Pool<T>();
+                }
+
+                return instance;
             }
-
-            return instance;
         }
-    }
 
-    private static Pool<T> instance;
+        private static Pool<T> instance;
 
-    public int CurrentPoolObjects => pooledObjects.Count;
+        public int CurrentPoolObjects => pooledObjects.Count;
 
-    public UnityEvent OnObjectDestroyed = new UnityEvent();
-    public UnityEvent OnObjectSpawned = new UnityEvent();
+        public UnityEvent OnObjectDestroyed = new UnityEvent();
+        public UnityEvent OnObjectSpawned = new UnityEvent();
 
-    private List<T> pooledObjects = new List<T>();
-    private GameObject prefab;
-    private Transform poolParrent;
+        private List<T> pooledObjects = new List<T>();
+        private GameObject prefab;
+        private Transform poolParrent;
 
     
 
-    public void InitPool(int items, GameObject gameObject)
-    {
-        if (poolParrent == null)
+        public void InitPool(int items, GameObject gameObject)
         {
-            poolParrent = new GameObject().transform;
-            poolParrent.name = typeof(Pool<T>).ToString();
-        }
-        prefab = gameObject;
-        for (int i = 0; i < items; i++)
-        {
-            GameObject g = GameObject.Instantiate(gameObject, poolParrent);
-            pooledObjects.Add(g.GetComponent<T>());
-            g.SetActive(false);
-        }
-    }
-
-    public T GetObject()
-    {
-        if (pooledObjects.Count == 0)
-        {
-            Debug.LogWarning("No objects in pool");
-            return default(T);
+            if (poolParrent == null)
+            {
+                poolParrent = new GameObject().transform;
+                poolParrent.name = typeof(Pool<T>).ToString();
+            }
+            prefab = gameObject;
+            for (int i = 0; i < items; i++)
+            {
+                GameObject g = GameObject.Instantiate(gameObject, poolParrent);
+                pooledObjects.Add(g.GetComponent<T>());
+                g.SetActive(false);
+            }
         }
 
-        OnObjectSpawned.Invoke();
-        T t = pooledObjects[0];
-        t.gameObject.SetActive(true);
-        pooledObjects.RemoveAt(0);
-        return t;
-    }
+        public T GetObject()
+        {
+            if (pooledObjects.Count == 0)
+            {
+                Debug.LogWarning("No objects in pool");
+                return default(T);
+            }
 
-    public void BackToPool(T t)
-    {
-        t.gameObject.SetActive(false);
-        pooledObjects.Add(t);
-        OnObjectDestroyed.Invoke();
+            OnObjectSpawned.Invoke();
+            T t = pooledObjects[0];
+            t.gameObject.SetActive(true);
+            pooledObjects.RemoveAt(0);
+            return t;
+        }
+
+        public void BackToPool(T t)
+        {
+            t.gameObject.SetActive(false);
+            pooledObjects.Add(t);
+            OnObjectDestroyed.Invoke();
+        }
     }
 }

@@ -1,25 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Game;
 using UnityEngine;
 
-public class UILose : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private GameObject restartPanel;
-
-    // Start is called before the first frame update
-    void Start()
+    public class UILose : MonoBehaviour
     {
-        GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
-    }
+        [SerializeField] private GameObject restartPanel;
 
-    public void OnGameStateChanged()
-    {
-        restartPanel.SetActive(GameManager.Instance.GameState == GameState.waitForRestart);
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
+        }
 
-    public void RestartGame()
-    {
-        GameManager.Instance.SetGameState(GameState.playing);
+        public void OnGameStateChanged()
+        {
+            restartPanel.SetActive(GameManager.Instance.GameState == GameState.waitForRestart);
+        }
+
+        public void RestartGame()
+        {
+            GameManager.Instance.SetGameState(GameState.playing);
+        }
     }
 }

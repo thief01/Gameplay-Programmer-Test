@@ -1,49 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Patterns;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum GameState
+namespace Game
 {
-    playing,
-    waitForRestart
-}
-
-public class GameManager : Singleton<GameManager>
-{
-    public GameState GameState { get; private set; }
-    public UnityEvent OnGameStateChanged = new UnityEvent();
-
-    public int Points => points;
-
-    private int points=0;
-
-    private PlayerInput player;
-    private void Awake()
+    public enum GameState
     {
-        player = FindObjectOfType<PlayerInput>();
+        playing,
+        waitForRestart
     }
 
-    public void AddScore()
+    public class GameManager : Singleton<GameManager>
     {
-        points++;
-    }
+        public GameState GameState { get; private set; }
+        public UnityEvent OnGameStateChanged = new UnityEvent();
 
-    public void SetGameState(GameState gameState)
-    {
-        if (gameState == GameState.waitForRestart)
+        public int Points => points;
+
+        private int points=0;
+
+        private PlayerInput player;
+        private void Awake()
         {
-            Time.timeScale = 0;
+            player = FindObjectOfType<PlayerInput>();
         }
 
-        if (gameState == GameState.playing)
+        public void AddScore()
         {
-            Time.timeScale = 1;
-            points = 0;
+            points++;
         }
 
-        GameState = gameState;
-        OnGameStateChanged.Invoke();
+        public void SetGameState(GameState gameState)
+        {
+            if (gameState == GameState.waitForRestart)
+            {
+                Time.timeScale = 0;
+            }
+
+            if (gameState == GameState.playing)
+            {
+                Time.timeScale = 1;
+                points = 0;
+            }
+
+            GameState = gameState;
+            OnGameStateChanged.Invoke();
+        }
     }
 }

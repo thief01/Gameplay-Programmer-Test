@@ -1,28 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+namespace Patterns
 {
-    public static T Instance
+    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        get
+        public static T Instance
         {
-            if (instance == null)
+            get
             {
-                instance = FindObjectOfType<T>();
                 if (instance == null)
                 {
-                    GameObject g = new GameObject();
-                    g.name = "Instance of: " + typeof(T);
-                    instance = g.AddComponent<T>();
+                    instance = FindObjectOfType<T>();
+                    if (instance == null)
+                    {
+                        GameObject g = new GameObject();
+                        g.name = "Instance of: " + typeof(T);
+                        instance = g.AddComponent<T>();
+                    }
                 }
+                return instance;
             }
-            return instance;
         }
-    }
 
-    private static T instance;
+        private static T instance;
     
     
+    }
 }

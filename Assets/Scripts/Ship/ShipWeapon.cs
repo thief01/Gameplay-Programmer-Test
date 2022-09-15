@@ -1,33 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
+using Game;
+using Objects;
+using Patterns;
 using UnityEngine;
 
-public class ShipWeapon : MonoBehaviour
+namespace Ship
 {
-    [SerializeField] private Transform muzzlePoint;
-    [SerializeField] private float attackSpeed = 2;
-    
-    private float reloadTime = 0;
-    void Update()
+    public class ShipWeapon : MonoBehaviour
     {
-        if (reloadTime <= 0)
+        [SerializeField] private Transform muzzlePoint;
+        [SerializeField] private float attackSpeed = 2;
+    
+        private float reloadTime = 0;
+        void Update()
         {
-            Fire();
+            if (reloadTime <= 0)
+            {
+                Fire();
+            }
+
+            reloadTime -= Time.deltaTime;
         }
 
-        reloadTime -= Time.deltaTime;
-    }
+        private void Fire()
+        {
+            if (GameManager.Instance.GameState == GameState.waitForRestart)
+                return;
+            reloadTime = 1/attackSpeed;
+            var bullet = Pool<Bullet>.Instance.GetObject();
 
-    private void Fire()
-    {
-        if (GameManager.Instance.GameState == GameState.waitForRestart)
-            return;
-        reloadTime = 1/attackSpeed;
-        var bullet = Pool<Bullet>.Instance.GetObject();
-
-        bullet.transform.position = muzzlePoint.position;
-        bullet.transform.rotation = muzzlePoint.rotation;
-        bullet.InitBullet();
+            bullet.transform.position = muzzlePoint.position;
+            bullet.transform.rotation = muzzlePoint.rotation;
+            bullet.InitBullet();
+        }
     }
 }

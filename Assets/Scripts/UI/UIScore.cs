@@ -1,20 +1,21 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using Game;
 using TMPro;
 using UnityEngine;
 
-public class UIScore : MonoBehaviour
+namespace UI
 {
-    private TextMeshProUGUI score;
-
-    private void Awake()
+    public class UIScore : MonoBehaviour
     {
-        score = GetComponent<TextMeshProUGUI>();
-    }
+        private TextMeshProUGUI score;
 
-    void Update()
-    {
-        score.text = "Score: " + GameManager.Instance.Points.ToString();
+        private void Awake()
+        {
+            score = GetComponent<TextMeshProUGUI>();
+        }
+
+        void Update()
+        {
+            score.text = "Score: " + GameManager.Instance.Points.ToString();
+        }
     }
 }

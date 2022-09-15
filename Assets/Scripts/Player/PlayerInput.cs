@@ -1,29 +1,29 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour
+namespace Player
 {
-    private Ship ship;
-
-    private void Awake()
+    public class PlayerInput : MonoBehaviour
     {
-        ship = GetComponent<Ship>();
-    }
+        private Ship.Ship ship;
 
-    private void Update()
-    {
-        GetInput();
-    }
+        private void Awake()
+        {
+            ship = GetComponent<Ship.Ship>();
+        }
 
-    private void GetInput()
-    {
-        Vector2 direction = new Vector2();
+        private void Update()
+        {
+            GetInput();
+        }
 
-        direction.x = Input.GetAxis("Horizontal");
-        direction.y = Input.GetAxis("Vertical");
+        private void GetInput()
+        {
+            Vector2 direction = new Vector2();
+
+            direction.x = Input.GetAxis("Horizontal");
+            direction.y = Input.GetAxis("Vertical");
         
-        ship.Move(-direction);
+            ship.Move(-direction);
+        }
     }
 }
