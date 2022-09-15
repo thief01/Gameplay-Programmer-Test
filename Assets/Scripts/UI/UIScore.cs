@@ -19,7 +19,7 @@ namespace UI
         void Update()
         {
             score.text = "Score: " + GameManager.Instance.Points;
-            if (GameManager.Instance.Points == 70)
+            if (GameManager.Instance.Points % 70 == 0 && GameManager.Instance.Points != 0)
             {
                 StartCoroutine(FrogDelay());
             }

@@ -1468,5 +1468,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerShip
       objectReference: {fileID: 0}
+    - target: {fileID: 4175353733258671949, guid: 628906aa3b106f64789f039bf5dc2022, type: 3}
+      propertyPath: maxSpeed
+      value: 6.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175353733258671949, guid: 628906aa3b106f64789f039bf5dc2022, type: 3}
+      propertyPath: rotationSpeed
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4175353733258671949, guid: 628906aa3b106f64789f039bf5dc2022, type: 3}
+      propertyPath: forceMultipliter
+      value: 0.3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 628906aa3b106f64789f039bf5dc2022, type: 3}
